@@ -144,9 +144,11 @@ class _EntryWidgetState extends State<EntryWidget>{
           Expanded(
             flex: 1,
             child: OpenContainer(
-              transitionType: ContainerTransitionType.fadeThrough,
               closedColor: Colors.transparent,
-              openColor: Colors.transparent,
+              closedElevation: 0,
+              openShape: const CircleBorder(),
+              openColor: Colors.black,
+              transitionType: ContainerTransitionType.fadeThrough,
               closedBuilder: (context, _) => Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.white24),

@@ -146,7 +146,8 @@ class _EntryWidgetState extends State<EntryWidget>{
             child: OpenContainer(
               closedColor: Colors.transparent,
               closedElevation: 0,
-              openShape: const CircleBorder(),
+              openShape: const ContinuousRectangleBorder(),
+              closedShape: const CircleBorder(),
               openColor: Colors.black,
               transitionType: ContainerTransitionType.fadeThrough,
               closedBuilder: (context, _) => Container(

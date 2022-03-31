@@ -212,20 +212,31 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
       }else{
         finalMinute = finalDateTime.minute.toString();
       }
-      setState(() {
-        time.updateAll((key, value) => false);
-        durationUntilNow = false;
-        customEndDate = true;
       if(finalDateTime.difference(DateTime.now()).inDays == 0 && finalDateTime.day == DateTime.now().day){
+        setState(() {
           selectedEndDateDisplay = "Heute, " + finalDateTime.hour.toString() + ":" + finalMinute + " Uhr";
+          customEndDate = true;
+          time.updateAll((key, value) => false);
+        });
       }else if (DateTime.now().subtract(const Duration(days: 1)).day == finalDateTime.day){
+        setState(() {
           selectedEndDateDisplay = "Gestern, " + finalDateTime.hour.toString() + ":" + finalMinute + " Uhr";
+          customEndDate = true;
+          time.updateAll((key, value) => false);
+        });
       }else if(DateTime.now().subtract(const Duration(days: 2)).day == finalDateTime.day) {
+        setState(() {
           selectedEndDateDisplay = "Vorgestern, " + finalDateTime.hour.toString() + ":" + finalMinute + " Uhr";
+          customEndDate = true;
+          time.updateAll((key, value) => false);
+        });
       }else{
+        setState(() {
           selectedEndDateDisplay = finalDateTime.day.toString() + "." + finalDateTime.month.toString() + "." + finalDateTime.year.toString() + ", " + finalDateTime.hour.toString() + ":" + finalMinute + " Uhr";
+          customEndDate = true;
+          time.updateAll((key, value) => false);
+        });
       }
-      });
       selectedEndDate = finalDateTime;
       return finalDateTime;
     }

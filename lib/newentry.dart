@@ -103,7 +103,13 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
       return true;
     }else if(!customStartDate && customEndDate){
       if(timestamp.values.contains(true)) {
-        if (selectedEndDate.isAfter(DateTime.now().subtract(Duration(minutes: timestamp.keys.elementAt(timestamp.values.toList().indexWhere((element) => true))))) || selectedEndDate == DateTime.now()) {
+        if (selectedEndDate.isAfter(DateTime.now().subtract(Duration(minutes: timestamp.keys.elementAt(timestamp.values.toList().indexWhere((element){
+          if(element == true){
+            return true;
+          }else{
+            return false;
+          }
+        }))))) || selectedEndDate == DateTime.now()) {
           setState(() {
             error_endDate_before_startDate = false;
           });

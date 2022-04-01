@@ -26,7 +26,7 @@ DateTime lastStartDate = DateTime.now();
 DateTime firstEndDate = DateTime(2010);
 DateTime lastEndDate = DateTime.now();
 
-bool error_endDate_before_startDate = false;
+bool errorEndDate = false;
 bool customEndDateEnabled = true;
 
 Map<int,bool> time = {
@@ -71,7 +71,7 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
 
   void resetCustomEndDateChip(){
     setState(() {
-      error_endDate_before_startDate = false;
+      errorEndDate = false;
       selectedEndDateDisplay = "Zeitpunkt auswählen";
       selectedEndDate = DateTime.now();
       customEndDate = false;
@@ -96,9 +96,16 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
   }
 
   bool checkIfDatesAreCorrect(DateTime start, DateTime end){
+    if(selectedEndDate.isAfter(DateTime.now())){
+      setState(() {
+        errorEndDate = true;
+      });
+      return false;
+    }
+
     if(customStartDate && !customEndDate){
       setState(() {
-        error_endDate_before_startDate = false;
+        errorEndDate = false;
       });
       return true;
     }else if(!customStartDate && customEndDate){
@@ -111,7 +118,7 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
           }
         }))))) || selectedEndDate == DateTime.now()) {
           setState(() {
-            error_endDate_before_startDate = false;
+            errorEndDate = false;
           });
           return true;
         }else{
@@ -123,18 +130,18 @@ class _NewEntryDialogState extends State<NewEntryDialog> {
       }else if (customStartDate && customEndDate) {
         if(selectedStartDate.isBefore(selectedEndDate)){
           setState(() {
-            error_endDate_before_startDate = false;
+            errorEndDate = false;
           });
           return true;
         }else{
           setState(() {
-            error_endDate_before_startDate = true;
+            errorEndDate = true;
           });
           return false;
         }
       }else if (!customStartDate && !customEndDate){
         setState(() {
-          error_endDate_before_startDate = false;
+          errorEndDate = false;
         });
         return true;
       }
